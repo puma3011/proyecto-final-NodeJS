@@ -1,4 +1,4 @@
-import { createProductService } from './src/servicios/products.service.js';
+import { createProductService } from './src/services/products.service.js';
 
 const initialProducts = [
     { name: "Mouse Gamer", price: 25000, category: "perifericos", stock: 10, description: "Mouse óptico 16000 DPI" },
