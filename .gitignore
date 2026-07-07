@@ -1,0 +1,9 @@
+# Dependencias (esta carpeta pesa mucho y no se debe subir)
+node_modules/
+
+# Variables de entorno (contiene las llaves secretas de Firebase)
+.env
+
+# Archivos del sistema operativo o editor
+.DS_Store
+.vscode/

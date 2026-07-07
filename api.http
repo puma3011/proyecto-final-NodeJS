@@ -1,0 +1,71 @@
+### CONFIGURACIÓN DE VARIABLES LOCALES
+# 1. Puerto del servidor
+@hostname = http://localhost:3000
+
+# 2. Después del login, pega el token aquí:
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTc4MzQ2NTE2MCwiZXhwIjoxNzgzNDY4NzYwfQ.WtkM0KfYlUeVqlPXJEBQ7UeBf62JxfIiDv-bAARX7h4
+
+# 3. Para probar GetById o Delete, pega un ID real aquí:
+@productoId = 1JytT3JYwP2mfJaqg3SK
+
+# 4. Para probar el filtro, configura estos valores:
+@categoria = perifericos
+@precioMax = 50000
+
+
+
+### 1. Iniciar sesión para obtener el Token
+# Cambia los valores si pusiste otros en tu .env
+POST {{hostname}}/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "123456"
+}
+
+### 2. Ruta Home / Bienvenida (Navegador)
+GET {{hostname}}/
+
+
+
+### 3. Obtener todos los productos (Público)
+GET {{hostname}}/api/products
+
+### 3.1. Obtener un producto específico por ID (Público)
+GET {{hostname}}/api/products/{{productoId}}
+
+
+
+### 3. Filtrar por precio y categoría (Público)
+GET {{hostname}}/api/products/filter?category={{categoria}}&price={{precioMax}}
+
+
+
+### 4. Crear un producto (Protegido - Requiere Token)
+POST {{hostname}}/api/products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Teclado Mecánico Pro",
+    "description": "Teclado gamer con switches azules y luces RGB custom",
+    "price": 45000,
+    "category": "perifericos",
+    "stock": 15,
+    "imageUrl": "https://link-a-imagen.com/teclado.jpg"
+}
+
+### 5. Actualizar un producto por ID (Protegido - Requiere Token)
+PUT {{hostname}}/api/products/{{productoId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "price": 49000,
+    "stock": 12
+}
+
+### 6. Eliminar un producto (Protegido - Requiere Token)
+DELETE {{hostname}}/api/products/{{productoId}}
+Authorization: Bearer {{token}}
